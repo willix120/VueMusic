@@ -2,10 +2,10 @@
 #app
   img(src='./assets/logo.png')
   h2 VueMusic
-  loading
   select(v-model="pais_seleccionado")
     option(v-for="pais in paises" v-bind:value="pais.value") {{ pais.name }}
-  #lista_artistas  
+  #lista_artistas
+    loading(v-show="cargando")
     artista(v-for="artista in artistas" v-bind:artista="artista" v-bind:key="artista.mbid")
 </template>
 
@@ -20,6 +20,7 @@ export default {
     return {
       pais_seleccionado: 'venezuela',
       artistas: [],
+      cargando: true,
       paises: [
       {name:'Venezuela',value:'venezuela'},
       {name:'Colombia',value:'colombia'},
@@ -34,9 +35,12 @@ export default {
   methods:{
     mostrar_lista: function () {
       const self = this
+      this.artistas = []
+      this.cargando = true
       getArtistas(this.pais_seleccionado)
         .then(function (artistas) {
           self.artistas = artistas
+          self.cargando = false
         })
     }
   },
