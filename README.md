@@ -2,6 +2,9 @@
 
 > Proyecto del curso de introducción a Vue de @platzi
 
+# Demo
+https://willix120.github.io/VueMusic/
+
 ## Build Setup
 
 ``` bash
